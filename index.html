@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		*{margin: 0;padding: 0;}
+		.wrap p{border-bottom: 1px solid #ddd;padding: 10px 5px;}
+		.wrap div.box{columns: auto 5;}
+		.wrap div.box span{display: block;padding: 5px 10px;}
+	</style>
+</head>
+
+<body>
+	<div class="wrap"></div>
+</body>
+<script>
+	let arr = [
+		{
+			date: '2021-12-29',
+			wordArr: ['pear','orange','teacher','pencil','nose','schoolbag','mouth','bird','tiger','monkey','one','two','three','four','five','six','seven','eight','nine','ten','many','chair','blackboard','under','light','near','behind','plane','doll','train','bear','rice','noodles','vegetable','chicken','hungry','water','thirsty','shirt','skirt','dress','socks','shorts']
+		}
+	]
+	let wrap = document.querySelector(".wrap");
+	let str = ``;
+	arr.map(row=>{
+		str += `<div><p>${row.date}</p><div class='box'>`;
+			row.wordArr.map(item=>{
+				str += `<span>${item}</span>`;
+			})
+		str += `</div></div>`
+	})
+	
+	wrap.innerHTML = str;
+</script>
+
+</html>
