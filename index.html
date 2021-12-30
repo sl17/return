@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style>
-		*{margin: 0;padding: 0;}
-		.wrap p{border-bottom: 1px solid #ddd;padding: 10px 5px;}
-		.wrap div.box{columns: auto 5;}
-		.wrap div.box span{display: block;padding: 5px 10px;}
-		@media screen and (max-width: 750px){.wrap div.box{columns: auto 3;}}
-	</style>
-	<title>出来混总是要还的</title>
-	<link rel="shortcut icon" href="//sl17.github.io/return/index.ico" type="image/x-icon">
-	<meta name="viewport" content="width=device-width,user-scalable=no">
+  <style>
+    *{margin: 0;padding: 0;}
+    .wrap p{border-bottom: 1px solid #ddd;padding: 10px 5px;}
+    .wrap div.box{columns: auto 5;}
+    .wrap div.box span{display: block;padding: 5px 10px;cursor: default;}
+    @media screen and (max-width: 750px){.wrap div.box{columns: auto 3;}}
+  </style>
+  <title>出来混总是要还的</title>
+  <link rel="shortcut icon" href="//sl17.github.io/return/index.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width,user-scalable=no">
 </head>
 
 <body>
-	<div class="wrap"></div>
+  <div class="wrap"></div>
+  <!-- 有道发音 -->
+  <audio id="youdao" src="http://dict.youdao.com/speech?audio=hello"></audio>
+  <!-- 百度发音 -->
+  <audio id="baidu" src="https://fanyi.baidu.com/gettts?lan=en&text=hello&spd=3&source=web"></audio>
 </body>
 <script>
-	let arr = [
-		{
-			date: '2021-12-29',
-			wordArr: ['pear','orange','teacher','pencil','nose','schoolbag','mouth','bird','tiger','monkey','one','two','three','four','five','six','seven','eight','nine','ten','many','chair','blackboard','under','light','near','behind','plane','doll','train','bear','rice','noodles','vegetable','chicken','hungry','water','thirsty','shirt','skirt','dress','socks','shorts']
-		}
-	]
-	let wrap = document.querySelector(".wrap");
-	let str = ``;
-	arr.map(row=>{
-		str += `<div><p>${row.date}</p><div class='box'>`;
-			row.wordArr.map(item=>{
-				str += `<span>${item}</span>`;
-			})
-		str += `</div></div>`
-	})
-	
-	wrap.innerHTML = str;
+  let arr = [
+    {
+      date: '2021-12-29',
+      wordArr: ['pear','orange','teacher','pencil','nose','schoolbag','mouth','bird','tiger','monkey','one','two','three','four','five','six','seven','eight','nine','ten','many','chair','blackboard','under','light','near','behind','plane','doll','train','bear','rice','noodles','vegetable','chicken','hungry','water','thirsty','shirt','skirt','dress','socks','shorts']
+    }
+  ]
+  let wrap = document.querySelector(".wrap");
+  let str = ``;
+  arr.map(row=>{
+    str += `<div><p>${row.date}</p><div class='box'>`;
+      row.wordArr.map(item=>{
+        str += `<span onclick="goPlay(this)">${item}</span>`;
+      })
+    str += `</div></div>`
+  })
+  let audio = document.getElementById("youdao")
+  let url = audio.src;
+  function goPlay(that) {
+    let textContent = that.innerText;
+    let newurl = url.replace("hello", textContent);
+    audio.src = newurl;
+    audio.play();
+  }
+  wrap.innerHTML = str;
 </script>
-
 </html>
